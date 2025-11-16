@@ -23,4 +23,13 @@ public class SensorData{
     public void displayData(){
         System.out.println(sensorType + ": " +value+ " "+ unit + " | Time: " + timestamp+ " | ID: "+sensorId );
     }
+
+    @Override
+    public String toString(){
+
+
+        return sensorType + ": " + value + " " + unit + 
+           " (ID: " + sensorId + ") at " + timestamp;
+        
+    }
 }
