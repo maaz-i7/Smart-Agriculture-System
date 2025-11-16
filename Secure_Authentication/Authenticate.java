@@ -194,7 +194,10 @@ public class Authenticate {
 
         return person;
     }
-
+    
+    /*
+     * Updates the password of a user
+     */
     public static void updatePassword() throws Exception {
 
         Scanner input = new Scanner(System.in);
@@ -213,7 +216,10 @@ public class Authenticate {
         checkPasswordStrength(newPassword);
         person.updatePassword(newPassword);
     }
-
+    
+    /*
+     * Deletes a user from the database
+     */
     public static void deleteUser() throws Exception {
 
         Scanner input = new Scanner(System.in);
@@ -250,4 +256,3 @@ public class Authenticate {
         currentUsersCount--;
     }
 }
-
