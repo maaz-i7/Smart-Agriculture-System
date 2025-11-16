@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.naming.InvalidNameException;
+
 import Authentication_Exceptions.*;
 
 public class Authenticate {
@@ -19,6 +22,9 @@ public class Authenticate {
      */
     private static Person usernameExists(String username) {
  
+        if(username == null)
+        return null;
+        
         for(int i = 0; i < currentUsersCount; i++) {
             
             if(users[i].username.equals(username))
@@ -40,7 +46,7 @@ public class Authenticate {
      */
     private static void checkValidUsername(String username) throws Exception {
  
-        if (username.charAt(0) == '.')
+        if (username == null || username.charAt(0) == '.')
             throw new InvalidUsernameException();
 
         for (int i = 0; i < username.length(); i++) {
@@ -62,6 +68,9 @@ public class Authenticate {
      * Otherwise throws InvalidNameException()
      */
     private static void checkValidName(String name) throws Exception {
+
+        if(name == null)
+        throw new InvalidNameException();
 
         for(int i = 0; i < name.length(); i++) {
 
@@ -85,7 +94,7 @@ public class Authenticate {
      */
     private static void checkPasswordStrength(String password) throws Exception {
 
-        if(password.length() < 8)
+        if(password == null || password.length() < 8)
         throw new WeakPasswordException();
 
         boolean lowerCasePresent = false;
@@ -206,5 +215,41 @@ public class Authenticate {
         String newPassword = input.next();
         checkPasswordStrength(newPassword);
         person.updatePassword(newPassword);
+    }
+
+    public static void deleteUser() throws Exception {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("\nEnter username: ");
+        String username = input.next();
+
+        Person person = usernameExists(username);
+
+        if(person == null)
+        throw new UserDoesNotExistException();
+
+        System.out.print("\nEnter password: ");
+        String password = input.next();
+        
+        if(!person.isPasswordMatch(password))
+        throw new IncorrectPasswordException();
+
+        int i = 0;
+
+        for(; i < currentUsersCount; i++) {
+            if(users[currentUsersCount].username.equals(username))
+                break;
+        }
+
+        for(; i < currentUsersCount-1; i++) {
+
+            Person tempUser = users[i];
+            users[i] = users[i+1];
+            users[i+1] = tempUser;
+        }
+
+        users[i] = null;
+        currentUsersCount--;
     }
 }
