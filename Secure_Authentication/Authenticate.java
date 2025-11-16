@@ -1,7 +1,4 @@
 import java.util.*;
-
-import javax.naming.InvalidNameException;
-
 import Authentication_Exceptions.*;
 
 public class Authenticate {
@@ -253,3 +250,4 @@ public class Authenticate {
         currentUsersCount--;
     }
 }
+
