@@ -1,28 +1,26 @@
 import java.util.*;
 import Authentication_Exceptions.*;
 
-public class Authenticate {
+interface Authenticate {
 
     /*
      * users             - stores the list of all users, initialized to a size of 100
      * usersTypes        - stores the three types of users, viz "Admin", "Agronomist", "Farmer"
-     * currentUsersCount - stores the count of current number of users
      */
-    private static Person[] users = new Person[100];
-    private static String[] usersTypes = {"Admin", "Agronomist", "Farmer"};
-    private static int currentUsersCount = 0;
+    public static Person[] users = new Person[100];
+    public static String[] usersTypes = {"Admin", "Agronomist", "Farmer"};
 
     /*
      * checks if the username already exists in the database
      * If true, returns the user
      * else, returns null
      */
-    private static Person usernameExists(String username) {
+    static Person usernameExists(String username) {
  
         if(username == null)
         return null;
         
-        for(int i = 0; i < currentUsersCount; i++) {
+        for(int i = 0; i < Admin.currentUsersCount; i++) {
             
             if(users[i].username.equals(username))
                 return users[i];
@@ -89,7 +87,7 @@ public class Authenticate {
      * If above all conditions are met, password is strong and returns
      * Otherwise, throws WeakPasswordException()
      */
-    private static void checkPasswordStrength(String password) throws Exception {
+    static void checkPasswordStrength(String password) throws Exception {
 
         if(password == null || password.length() < 8)
         throw new WeakPasswordException();
@@ -168,7 +166,7 @@ public class Authenticate {
         else 
         person = new Farmer(name, username, usersTypes[2], password, phoneNum);
 
-        users[currentUsersCount++] = person;
+        users[Admin.currentUsersCount++] = person;
     }
 
     /*
@@ -194,65 +192,8 @@ public class Authenticate {
 
         return person;
     }
-    
-    /*
-     * Updates the password of a user
-     */
-    public static void updatePassword() throws Exception {
 
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("\nEnter username: ");
-        String username = input.next();
-
-        Person person = usernameExists(username);
-
-        if(person == null)
-        throw new UserDoesNotExistException();
-
-        System.out.print("\nEnter new password: ");
-        System.out.println(WeakPasswordException.conditions);
-        String newPassword = input.next();
-        checkPasswordStrength(newPassword);
-        person.updatePassword(newPassword);
-    }
-    
-    /*
-     * Deletes a user from the database
-     */
-    public static void deleteUser() throws Exception {
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("\nEnter username: ");
-        String username = input.next();
-
-        Person person = usernameExists(username);
-
-        if(person == null)
-        throw new UserDoesNotExistException();
-
-        System.out.print("\nEnter password: ");
-        String password = input.next();
-        
-        if(!person.isPasswordMatch(password))
-        throw new IncorrectPasswordException();
-
-        int i = 0;
-
-        for(; i < currentUsersCount; i++) {
-            if(users[currentUsersCount].username.equals(username))
-                break;
-        }
-
-        for(; i < currentUsersCount-1; i++) {
-
-            Person tempUser = users[i];
-            users[i] = users[i+1];
-            users[i+1] = tempUser;
-        }
-
-        users[i] = null;
-        currentUsersCount--;
-    }
+    // To be implemented by Admin class
+    void updatePasswordOfUser() throws Exception;
+    void deleteUser() throws Exception;
 }
