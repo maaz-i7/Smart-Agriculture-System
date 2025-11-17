@@ -1,8 +1,8 @@
-import java.util.Scanner;
+import java.io.Console;
 import Authentication_Exceptions.*;
 
-public class Admin extends Person implements Authenticate {
-    
+public class Admin extends Person implements Authentication {
+
     /*
      * currentUsersCount - stores the count of current number of users
      */
@@ -14,24 +14,20 @@ public class Admin extends Person implements Authenticate {
     }
 
     /*
-     * Updates the password of a user
+     * Updates the password of a user.
+     * First asks the username of the user
      */
     public void updatePasswordOfUser() throws Exception {
 
-        Scanner input = new Scanner(System.in);
+        Console consoleInput = System.console();
 
-        System.out.print("\nEnter username: ");
-        String username = input.next();
+        Person person = Authentication.signIn();
 
-        Person person = Authenticate.usernameExists(username);
-
-        if(person == null)
-        throw new UserDoesNotExistException();
-
-        System.out.print("\nEnter new password: ");
+        System.out.print("\nCreate a new password: ");
         System.out.println(WeakPasswordException.conditions);
-        String newPassword = input.next();
-        Authenticate.checkPasswordStrength(newPassword);
+        char[] passChars = consoleInput.readPassword("\nEnter new password: ");
+        String newPassword = String.valueOf(passChars);
+        Authentication.checkPasswordStrength(newPassword);
         person.updatePassword(newPassword);
     }
     
@@ -40,30 +36,18 @@ public class Admin extends Person implements Authenticate {
      */
     public void deleteUser() throws Exception {
 
-        Scanner input = new Scanner(System.in);
+        System.out.println("\nSign in with the user to be deleted:");
 
-        System.out.print("\nEnter username: ");
-        String username = input.next();
-
-        Person person = Authenticate.usernameExists(username);
-
-        if(person == null)
-        throw new UserDoesNotExistException();
-
-        System.out.print("\nEnter password: ");
-        String password = input.next();
-        
-        if(!person.isPasswordMatch(password))
-        throw new IncorrectPasswordException();
+        Person person = Authentication.signIn();
 
         int i = 0;
 
-        for(; i < Admin.currentUsersCount; i++) {
-            if(users[Admin.currentUsersCount].username.equals(username))
+        for(; i < currentUsersCount; i++) {
+            if(users[i].username.equals(person.username))
                 break;
         }
 
-        for(; i < Admin.currentUsersCount-1; i++) {
+        for(; i < currentUsersCount-1; i++) {
 
             Person tempUser = users[i];
             users[i] = users[i+1];
@@ -71,6 +55,6 @@ public class Admin extends Person implements Authenticate {
         }
 
         users[i] = null;
-        Admin.currentUsersCount--;
+        currentUsersCount--;
     }
 }
