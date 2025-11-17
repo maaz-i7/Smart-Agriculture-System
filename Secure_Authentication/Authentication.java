@@ -196,7 +196,7 @@ interface Authentication {
         return person;
     }
 
-    static void displayAllDetailsOfUsers() {
+    public static void displayAllDetailsOfUsers() {
 
         int count = 0;
 
@@ -227,4 +227,5 @@ interface Authentication {
     // To be implemented by Admin class
     void updatePasswordOfUser() throws Exception;
     void deleteUser() throws Exception;
+
 }
