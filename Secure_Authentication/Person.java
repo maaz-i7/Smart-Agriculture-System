@@ -37,7 +37,7 @@ abstract class Person {
     }
 
     protected int[] getHashedPassword() {
-        return this.hashedPassword;
+        return this.hashedPassword.clone();
     }
 
     protected long getPhoneNum() {
@@ -55,4 +55,5 @@ abstract class Person {
     protected void updatePhoneNum(long newPhoneNum) {
         this.phoneNum = newPhoneNum;
     }
+
 }
