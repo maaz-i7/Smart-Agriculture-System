@@ -33,9 +33,9 @@ public class Encryptor {
      */
     protected static boolean isPasswordMatch(Person person, String enteredPassword) {
 
-        int i;
-        int[] hashedPassword = Arrays.copyOf(person.getHashedPassword(), person.getHashedPassword().length);
+        int[] hashedPassword = person.getHashedPassword();
 
+        int i;
         for(i = 0; i < 100; i++) {
             
             if(hashedPassword[i] == -1)
@@ -58,4 +58,5 @@ public class Encryptor {
 
         return password.equals(enteredPassword);
     }
+
 }
