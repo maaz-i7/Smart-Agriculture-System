@@ -1,3 +1,5 @@
+package Smart_Agriculture_System.Sensor_Simulation;
+
 public class SoilMoistureSensor extends Sensor {
     private double optimalMoisture;
     private double currentMoisture;

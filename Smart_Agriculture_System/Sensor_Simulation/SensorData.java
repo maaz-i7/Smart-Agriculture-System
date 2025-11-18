@@ -1,3 +1,5 @@
+package Smart_Agriculture_System.Sensor_Simulation;
+
 import java.time.LocalDateTime;
 
 public class SensorData{

@@ -1,3 +1,5 @@
+package Smart_Agriculture_System.Sensor_Simulation;
+
 public class HumiditySensor extends Sensor {
     private double baseHumidity;
     private double minHumidity;
