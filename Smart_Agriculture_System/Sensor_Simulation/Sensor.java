@@ -3,7 +3,7 @@ package Smart_Agriculture_System.Sensor_Simulation;
 import java.time.LocalDateTime;
 import java.util.Random;
 
-public abstract class Sensor{
+public abstract class Sensor implements Monitorable, Controllable{
     protected String sensorId;
     protected String sensorType;
     protected String unit;
