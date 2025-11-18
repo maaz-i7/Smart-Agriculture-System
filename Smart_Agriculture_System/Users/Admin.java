@@ -10,9 +10,17 @@ public class Admin extends Person implements Authentication {
      */
     public static int currentUsersCount = 0;
 
-    public Admin(String name, String username, String accountType, String password, long phoneNum) {
+    /*
+     * Overloaded Constructors
+     */
+    public Admin(String name, String username, String password, long phoneNum) {
 
-        super(name, username, accountType, password, phoneNum, 100000);
+        super(name, username, "Admin", password, phoneNum, 100000);
+    }
+
+    public Admin(String name, String username, String password, long phoneNum, double salary) {
+
+        super(name, username, "Admin", password, phoneNum, salary);
     }
 
     /*
