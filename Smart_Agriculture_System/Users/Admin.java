@@ -26,7 +26,7 @@ public class Admin extends Person {
     /*
      * UsersAdmin - admin of all users, takes actions related to users
      */
-    public static class UsersAdmin implements Authentication {
+    public class UsersAdmin implements Authentication {
 
         /*
          * Updates the password of a user.
@@ -77,7 +77,7 @@ public class Admin extends Person {
     /*
      * FieldAdmin - admin of farm, takes farm related actions
      */
-    public static class FieldAdmin {
+    public class FieldAdmin {
 
 
     }
