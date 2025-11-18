@@ -2,8 +2,16 @@ package Smart_Agriculture_System.Users;
 
 public class Farmer extends Person {
     
-    public Farmer(String name, String username, String accountType, String password, long phoneNum) {
+    /*
+     * Overloaded Constructors
+     */
+    public Farmer(String name, String username, String password, long phoneNum) {
 
-        super(name, username, accountType, password, phoneNum, 50000);
+        super(name, username, "Farmer", password, phoneNum, 50000);
+    }
+
+    public Farmer(String name, String username, String password, long phoneNum, double salary) {
+
+        super(name, username, "Farmer", password, phoneNum, salary);
     }
 }
