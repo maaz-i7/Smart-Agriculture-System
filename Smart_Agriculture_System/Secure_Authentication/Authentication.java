@@ -24,7 +24,6 @@ public interface Authentication {
         return null;
         
         for(int i = 0; i < Admin.currentUsersCount; i++) {
-            
             if(users[i].username.equals(username))
                 return users[i];
         }
@@ -68,12 +67,11 @@ public interface Authentication {
     private static void checkValidName(String name) throws Exception {
 
         if(name == null)
-        throw new InvalidNameException();
+            throw new InvalidNameException();
 
         for(int i = 0; i < name.length(); i++) {
-
             if(Character.isLetter(name.charAt(i)) || name.charAt(i) == ' ')
-            continue;
+                continue;
 
             throw new InvalidNameException();
         }
@@ -93,7 +91,7 @@ public interface Authentication {
     static void checkPasswordStrength(String password) throws Exception {
 
         if(password == null || password.length() < 8)
-        throw new WeakPasswordException();
+            throw new WeakPasswordException();
 
         boolean lowerCasePresent = false;
         boolean upperCasePresent = false;
@@ -103,20 +101,20 @@ public interface Authentication {
         for(int i = 0; i < password.length(); i++) {
 
             if(Character.isLowerCase(password.charAt(i)))
-            lowerCasePresent = true;
+                lowerCasePresent = true;
 
             else if(Character.isUpperCase(password.charAt(i)))
-            upperCasePresent = true;
+                upperCasePresent = true;
 
             else if(Character.isDigit(password.charAt(i)))
-            numberPresent = true;
+                numberPresent = true;
 
             else
-            specialCharPresent = true;
+                specialCharPresent = true;
         }
 
         if(!lowerCasePresent || !upperCasePresent || !numberPresent || !specialCharPresent)
-        throw new WeakPasswordException();
+            throw new WeakPasswordException();
     }
     
     /*
@@ -134,7 +132,7 @@ public interface Authentication {
         int employeeType = input.nextInt();
 
         if(employeeType > 2)
-        throw new InvalidUserTypeException();
+            throw new InvalidUserTypeException();
 
         String name = consoleInput.readLine("\nEnter your full name: ");
         checkValidName(name);
@@ -162,13 +160,13 @@ public interface Authentication {
         Person person;
 
         if(employeeType == 0)
-        person = new Admin(name, username, password, phoneNum);
+            person = new Admin(name, username, password, phoneNum);
 
         else if(employeeType == 1)
-        person = new Agronomist(name, username, password, phoneNum);
+            person = new Agronomist(name, username, password, phoneNum);
 
         else 
-        person = new Farmer(name, username, password, phoneNum);
+            person = new Farmer(name, username, password, phoneNum);
 
         users[Admin.currentUsersCount++] = person;
     }
@@ -187,17 +185,19 @@ public interface Authentication {
         Person person = doesUsernameExist(username);
 
         if(person == null)
-        throw new UserDoesNotExistException();
+            throw new UserDoesNotExistException();
         
         char[] passChars = consoleInput.readPassword("\nEnter password: ");
         String password = String.valueOf(passChars);
         
         if(!person.isPasswordMatch(password))
-        throw new IncorrectPasswordException();
+            throw new IncorrectPasswordException();
 
         return person;
     }
-
+    /*
+     * Displays all the users in the database
+     */
     static void displayAllDetailsOfUsers() {
 
         int count = 0;
@@ -205,7 +205,7 @@ public interface Authentication {
         for(Person person : users) {
 
             if(person == null)
-            break;
+                break;
 
             System.err.println("\n\nUser#" + count++);
             System.out.println("User type       : " + person.accountType);
@@ -213,8 +213,7 @@ public interface Authentication {
             System.out.println("Full name       : " + person.name);
             System.out.print("Hashed Password : ");
 
-            for(int i : person.getHashedPassword()) {
-                
+            for(int i : person.getHashedPassword()) { 
                 if(i == -1)
                 break;
 

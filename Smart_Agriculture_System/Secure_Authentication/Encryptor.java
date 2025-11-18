@@ -6,8 +6,9 @@ public class Encryptor {
     
     /*
      * Simulates the hashing of a password String
+     * Hashing algorithm:
      * First the password is reversed
-     * Then, from 0th index of the reversed password String, the characters' (ASCII values + index_number) is hashed in password[]
+     * Then, from 0th index of the reversed password String, the characters' (ASCII values + index_number) is hashed in hashedPassword[]
      */
     protected static int[] hashPassword(String password) {
         
@@ -18,11 +19,11 @@ public class Encryptor {
 
         //password string reversed
         for(int i = password.length()-1; 0 <= i; i--)
-        reversedPassword += Character.toString(password.charAt(i));
+            reversedPassword += Character.toString(password.charAt(i));
 
         //(ASCII value of password.charAt(i) + i) is hashed in password[]
         for(int i = 0; i < reversedPassword.length(); i++)
-        hashedPassword[i] = ((int)reversedPassword.charAt(i)) + i;
+            hashedPassword[i] = ((int)reversedPassword.charAt(i)) + i;
 
         return hashedPassword;
     }
@@ -39,21 +40,18 @@ public class Encryptor {
 
         int i;
         for(i = 0; i < 100; i++) {
-            
-            if(hashedPassword[i] == -1)
-            break;
+            if(hashedPassword[i] == -1) {
+                i--;
+                break;
+            } 
 
             hashedPassword[i] -= i;
         }
 
-        i--;
-
         String password = "";
-
         for(; 0 <= i; i--) {
-
             if(hashedPassword[i] == -1)
-            break;
+                break;
 
             password += Character.toString((char)(hashedPassword[i]));
         }
