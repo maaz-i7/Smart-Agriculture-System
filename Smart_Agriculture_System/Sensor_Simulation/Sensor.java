@@ -1,6 +1,7 @@
+package Smart_Agriculture_System.Sensor_Simulation;
+
 import java.time.LocalDateTime;
 import java.util.Random;
-
 
 public abstract class Sensor{
     protected String sensorId;

@@ -1,3 +1,5 @@
+package Smart_Agriculture_System.Sensor_Simulation;
+
 public class TemperatureSensor extends Sensor{
 
     private double baseTemperature;
