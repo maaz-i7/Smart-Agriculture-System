@@ -24,6 +24,7 @@ public class Admin extends Person {
     }
 
     /*
+     * Nested inner class
      * UsersAdmin - admin of all users, takes actions related to users
      */
     public class UsersAdmin implements Authentication {
@@ -56,14 +57,12 @@ public class Admin extends Person {
             Person person = Authentication.signIn();
 
             int i = 0;
-
             for (; i < currentUsersCount; i++) {
                 if (users[i].username.equals(person.username))
                     break;
             }
 
             for (; i < currentUsersCount - 1; i++) {
-
                 Person tempUser = users[i];
                 users[i] = users[i + 1];
                 users[i + 1] = tempUser;
@@ -75,7 +74,8 @@ public class Admin extends Person {
     }
 
     /*
-     * FieldAdmin - admin of farm, takes farm related actions
+     * Nested inner class
+     * FieldAdmin - admin of the farm, takes farm related actions
      */
     public class FieldAdmin {
 
