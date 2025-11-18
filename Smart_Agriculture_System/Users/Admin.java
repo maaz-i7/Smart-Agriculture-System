@@ -3,7 +3,7 @@ import java.io.Console;
 import Smart_Agriculture_System.Secure_Authentication.Authentication;
 import Smart_Agriculture_System.Secure_Authentication.Authentication_Exceptions.*;
 
-public class Admin extends Person implements Authentication {
+public class Admin extends Person {
 
     /*
      * currentUsersCount - stores the count of current number of users
@@ -24,47 +24,61 @@ public class Admin extends Person implements Authentication {
     }
 
     /*
-     * Updates the password of a user.
-     * First asks the username of the user
+     * UsersAdmin - admin of all users, takes actions related to users
      */
-    public void updatePasswordOfUser() throws Exception {
+    public static class UsersAdmin implements Authentication {
 
-        Console consoleInput = System.console();
+        /*
+         * Updates the password of a user.
+         * First asks the username of the user
+         */
+        public void updatePasswordOfUser() throws Exception {
 
-        Person person = Authentication.signIn();
+            Console consoleInput = System.console();
 
-        System.out.print("\nCreate a new password: ");
-        System.out.println(WeakPasswordException.conditions);
-        char[] passChars = consoleInput.readPassword("\nEnter new password: ");
-        String newPassword = String.valueOf(passChars);
-        Authentication.checkPasswordStrength(newPassword);
-        person.updatePassword(newPassword);
+            Person person = Authentication.signIn();
+
+            System.out.print("\nCreate a new password: ");
+            System.out.println(WeakPasswordException.conditions);
+            char[] passChars = consoleInput.readPassword("\nEnter new password: ");
+            String newPassword = String.valueOf(passChars);
+            Authentication.checkPasswordStrength(newPassword);
+            person.updatePassword(newPassword);
+        }
+
+        /*
+         * Deletes a user from the database
+         */
+        public void deleteUser() throws Exception {
+
+            System.out.println("\nSign in with the user to be deleted:");
+
+            Person person = Authentication.signIn();
+
+            int i = 0;
+
+            for (; i < currentUsersCount; i++) {
+                if (users[i].username.equals(person.username))
+                    break;
+            }
+
+            for (; i < currentUsersCount - 1; i++) {
+
+                Person tempUser = users[i];
+                users[i] = users[i + 1];
+                users[i + 1] = tempUser;
+            }
+
+            users[i] = null;
+            currentUsersCount--;
+        }
     }
-    
+
     /*
-     * Deletes a user from the database
+     * FieldAdmin - admin of farm, takes farm related actions
      */
-    public void deleteUser() throws Exception {
+    public static class FieldAdmin {
 
-        System.out.println("\nSign in with the user to be deleted:");
 
-        Person person = Authentication.signIn();
-
-        int i = 0;
-
-        for(; i < currentUsersCount; i++) {
-            if(users[i].username.equals(person.username))
-                break;
-        }
-
-        for(; i < currentUsersCount-1; i++) {
-
-            Person tempUser = users[i];
-            users[i] = users[i+1];
-            users[i+1] = tempUser;
-        }
-
-        users[i] = null;
-        currentUsersCount--;
     }
 }
