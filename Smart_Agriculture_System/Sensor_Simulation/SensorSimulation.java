@@ -26,7 +26,7 @@ public class SensorSimulation {
         headerPrinted = false;
         
         try {
-            String filename = "sensor_log_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".txt";
+            String filename = "sensor_data.txt";
             logWriter = new PrintWriter(new FileWriter(filename, true));
         } catch (IOException e) {
             System.err.println("Error creating log file: " + e.getMessage());
