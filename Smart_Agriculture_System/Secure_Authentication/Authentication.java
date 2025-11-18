@@ -162,13 +162,13 @@ public interface Authentication {
         Person person;
 
         if(employeeType == 0)
-        person = new Admin(name, username, usersTypes[0], password, phoneNum);
+        person = new Admin(name, username, password, phoneNum);
 
         else if(employeeType == 1)
-        person = new Agronomist(name, username, usersTypes[1], password, phoneNum);
+        person = new Agronomist(name, username, password, phoneNum);
 
         else 
-        person = new Farmer(name, username, usersTypes[2], password, phoneNum);
+        person = new Farmer(name, username, password, phoneNum);
 
         users[Admin.currentUsersCount++] = person;
     }
