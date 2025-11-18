@@ -52,4 +52,8 @@ public void setActive(boolean active){
     this.isActive = active;
 }
 
+public String getSensorType(){
+    return sensorType;
+}
+
 }

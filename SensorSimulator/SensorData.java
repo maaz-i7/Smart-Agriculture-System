@@ -9,7 +9,7 @@ public class SensorData{
 
 
     public SensorData(String sensorType, double value, String unit, LocalDateTime timestamp, String sensorId){
-        this.sensorId=sensorId;
+        this.sensorType = sensorType;
         this.value = value;
         this.unit = unit;
         this.timestamp = timestamp;
