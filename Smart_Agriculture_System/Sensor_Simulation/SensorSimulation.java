@@ -45,6 +45,32 @@ public class SensorSimulation {
         sensors.add(soilSensor);
         sensors.add(lightSensor);
     }
+
+    /**
+     * Convenience method other classes can call at runtime to set the soil
+     * moisture sensor's value to maximum (100%). If multiple soil sensors
+     * exist, this will set all of them to max.
+     */
+    public void setSoilMoistureMax() {
+        for (Sensor sensor : sensors) {
+            if (sensor instanceof SoilMoistureSensor) {
+                ((SoilMoistureSensor) sensor).setSoilMoistureMax();
+            }
+        }
+    }
+
+    /**
+     * Convenience method other classes can call at runtime to set the light
+     * intensity sensor's value to minimum (5000 lx - dim indoor lighting).
+     * If multiple light sensors exist, this will set all of them to min.
+     */
+    public void setLightIntensityMin() {
+        for (Sensor sensor : sensors) {
+            if (sensor instanceof LightIntensitySensor) {
+                ((LightIntensitySensor) sensor).setLightIntensityMin();
+            }
+        }
+    }
     
     public void startSimulation() {
         if (isRunning) {

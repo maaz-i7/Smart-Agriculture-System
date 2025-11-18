@@ -36,4 +36,10 @@ public class SoilMoistureSensor extends Sensor {
 
         return moisture;
     }
+
+   
+    public void setSoilMoistureMax() {
+        this.currentMoisture = 100.0;
+        this.currentValue = 100.0;
+    }
 }
