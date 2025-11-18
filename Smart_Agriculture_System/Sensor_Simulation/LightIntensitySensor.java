@@ -69,13 +69,8 @@ private double calculateDayNightIntensity() {
         return maxLightIntensity * sunFactor * cloudFactor;
     }
 
-    /**
-     * Sets the light intensity to a minimum value (5000 lx - dim indoor lighting).
-     * This represents low but still functional lighting conditions.
-     * Disables day/night cycle to maintain the set value with small variations.
-     */
     public void setLightIntensityMin() {
-        this.dayNightCycle = false;  // Disable day/night cycle
+        this.dayNightCycle = false;  
         this.currentIntensity = 5000.0;
         this.currentValue = 5000.0;
     }

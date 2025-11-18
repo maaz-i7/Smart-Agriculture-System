@@ -71,6 +71,32 @@ public class SensorSimulation {
             }
         }
     }
+
+    /**
+     * Convenience method other classes can call at runtime to set the temperature
+     * sensor's value to minimum comfortable level (22°C).
+     * If multiple temperature sensors exist, this will set all of them to 22°C.
+     */
+    public void setTemperatureMin() {
+        for (Sensor sensor : sensors) {
+            if (sensor instanceof TemperatureSensor) {
+                ((TemperatureSensor) sensor).setTemperatureMin();
+            }
+        }
+    }
+
+    /**
+     * Convenience method other classes can call at runtime to set the temperature
+     * sensor's value to maximum (50°C - extreme heat).
+     * If multiple temperature sensors exist, this will set all of them to 50°C.
+     */
+    public void setTemperatureMax() {
+        for (Sensor sensor : sensors) {
+            if (sensor instanceof TemperatureSensor) {
+                ((TemperatureSensor) sensor).setTemperatureMax();
+            }
+        }
+    }
     
     public void startSimulation() {
         if (isRunning) {
@@ -171,7 +197,7 @@ public class SensorSimulation {
     }
     
     private void checkLightAlert(SensorData reading) {
-        if (reading.value < 10000) {
+        if (reading.value < 3000) {
             System.out.println("ALERT: Low light conditions!");
         }
     }

@@ -35,4 +35,22 @@ public class TemperatureSensor extends Sensor{
         return temperature;
 }
 
+    /**
+     * Sets the temperature to a minimum comfortable value (22°C).
+     * This represents optimal room temperature conditions.
+     */
+    public void setTemperatureMin() {
+        this.baseTemperature = 22.0;
+        this.currentValue = 22.0;
+    }
+
+    /**
+     * Sets the temperature to a maximum value (50°C).
+     * This represents extreme heat conditions.
+     */
+    public void setTemperatureMax() {
+        this.baseTemperature = 50.0;
+        this.currentValue = 50.0;
+    }
+
 }
