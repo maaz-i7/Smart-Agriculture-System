@@ -38,8 +38,8 @@ public class SensorSimulation {
         headerPrinted = false;
         
         try {
-            String filename = "sensor_data.txt";
-            logWriter = new PrintWriter(new FileWriter(filename, true));
+            String filename = "logs/sensor_data.txt";
+            logWriter = new PrintWriter(new FileWriter(filename, false));
         } catch (IOException e) {
             System.err.println("Error creating log file: " + e.getMessage());
             logWriter = null;

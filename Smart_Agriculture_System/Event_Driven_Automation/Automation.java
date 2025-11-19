@@ -7,12 +7,19 @@ import java.io.FileReader;
 public class Automation {
 
     // Default threshold values for triggering different automated actions , can be changed by User
-    public static double MOISTURE_THRESHOLD = 40.0;
+    public static double MOISTURE_THRESHOLD = 45.0;
     public static double TEMPERATURE_THRESHOLD = 45.0;
     public static double HUMIDITY_THRESHOLD = 60.0;
     public static double LIGHT_THRESHOLD = 60000.0;
 
     public static void main(String[] args) throws Exception {
+
+        // Ensure logs directory exists
+        new java.io.File("logs").mkdirs();
+
+        // Clear previous run's log files
+        new java.io.File("logs/warning.txt").delete();
+        new java.io.File("logs/automaticActions.txt").delete();
 
         // Create sensor simulation instance
         SensorSimulation simulation = new SensorSimulation();
@@ -33,7 +40,7 @@ public class Automation {
         int hour = 0;
 
         // Read sensor data from file and process line-by-line
-        try (BufferedReader reader = new BufferedReader(new FileReader("sensor_data.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("logs/sensor_data.txt"))) {
 
             reader.readLine();  // Skip header line in the file
             Thread.sleep(5000); // Ensure a 5-second delay before first processing
