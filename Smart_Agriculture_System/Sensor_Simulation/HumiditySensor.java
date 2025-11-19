@@ -41,4 +41,13 @@ public class HumiditySensor extends Sensor {
     
     }
 
+    /**
+     * Sets the humidity to a minimum value (10%).
+     * This represents very low humidity conditions.
+     */
+    public void setHumidityMin() {
+        this.baseHumidity = 30.0;
+        this.currentValue = 30.0;
+    }
+
 }
