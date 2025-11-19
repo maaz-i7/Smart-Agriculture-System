@@ -1,4 +1,5 @@
 package Smart_Agriculture_System.Event_Driven_Automation;
+import Smart_Agriculture_System.Sensor_Simulation.SensorSimulation;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,21 +11,20 @@ public class Automation {
     public static double LIGHT_THRESHOLD = 60000.0;
 
     public static void main(String[] args) throws Exception {
-        // can this be done to run the sensor simulation in parallel?
-        /*
-         * Thread sensorThread = new Thread(() -> {
-         * try {
-         * Smart_Agriculture_System.Sensor_Simulation.SensorSimulation.main(null);
-         * } catch (Exception e) {
-         * e.printStackTrace();
-         * }
-         * });
-         * 
-         * sensorThread.start();
-         * 
-         * Thread.sleep(2000);
-         */
+
+        // Start sensor simulation in parallel
+        SensorSimulation simulation = new SensorSimulation();
+        Analysis.simulation = simulation; // Make it available to Analysis/Checks
+        Thread sensorThread = new Thread(() -> {
+            simulation.initializeSensors();
+            simulation.startSimulation();
+        });
+        sensorThread.start();
+
+        Thread.sleep(2000); // Give sensors time to start
+
         int hour = 0;
+        
         try (BufferedReader reader = new BufferedReader(new FileReader(
                 "Smart_Agriculture_System\\sensor_data.txt"))) {
             String line;

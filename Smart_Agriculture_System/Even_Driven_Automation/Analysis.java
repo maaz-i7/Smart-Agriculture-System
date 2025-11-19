@@ -1,6 +1,8 @@
 package Smart_Agriculture_System.Event_Driven_Automation;
+import Smart_Agriculture_System.Sensor_Simulation.SensorSimulation;
 
 public class Analysis {
+    public static SensorSimulation simulation;
 
     public static void process(String line) throws Exception {
 

@@ -175,15 +175,13 @@ public class SensorSimulation {
     }
     
     private void checkTemperatureAlert(SensorData reading) {
-        if (reading.value > 35) {
+        if (reading.value > 55) {
             System.out.println("ALERT: High temperature detected!");
-        } else if (reading.value < 5) {
-            System.out.println("ALERT: Low temperature detected!");
         }
     }
     
     private void checkSoilAlert(SensorData reading) {
-        if (reading.value < 20) {
+        if (reading.value < 60) {
             System.out.println("ALERT: Soil moisture very low - Irrigation needed!");
         }
     }
@@ -191,14 +189,12 @@ public class SensorSimulation {
     private void checkHumidityAlert(SensorData reading) {
         if (reading.value > 80) {
             System.out.println("ALERT: Very high humidity detected!");
-        } else if (reading.value < 25) {
-            System.out.println("ALERT: Very low humidity detected!");
         }
     }
     
     private void checkLightAlert(SensorData reading) {
-        if (reading.value < 3000) {
-            System.out.println("ALERT: Low light conditions!");
+        if (reading.value > 60000) {
+            System.out.println("ALERT: High light conditions!");
         }
     }
     
