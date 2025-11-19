@@ -11,13 +11,25 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class SensorSimulation {
+    // list of all sensors
     private List<Sensor> sensors;
+    
+    // timer for periodic updates
     private Timer timer;
+    
+    // whether simulation is running
     private boolean isRunning;
+    
+    // seconds between sensor readings
     private int updateIntervalSeconds;
+    
+    // whether header has been printed
     private boolean headerPrinted;
+    
+    // file writer for logging data
     private PrintWriter logWriter;
     
+    // create new sensor simulation
     public SensorSimulation() {
         sensors = new ArrayList<>();
         timer = new Timer();
@@ -34,6 +46,7 @@ public class SensorSimulation {
         }
     }
     
+    // create all four sensor instances
     public void initializeSensors() {
         TemperatureSensor tempSensor = new TemperatureSensor("TEMP_001");
         HumiditySensor humiditySensor = new HumiditySensor("HUM_001");
@@ -46,11 +59,7 @@ public class SensorSimulation {
         sensors.add(lightSensor);
     }
 
-    /**
-     * Convenience method other classes can call at runtime to set the soil
-     * moisture sensor's value to maximum (100%). If multiple soil sensors
-     * exist, this will set all of them to max.
-     */
+    // set all soil sensors to max
     public void setSoilMoistureMax() {
         for (Sensor sensor : sensors) {
             if (sensor instanceof SoilMoistureSensor) {
@@ -59,11 +68,7 @@ public class SensorSimulation {
         }
     }
 
-    /**
-     * Convenience method other classes can call at runtime to set the light
-     * intensity sensor's value to minimum (5000 lx - dim indoor lighting).
-     * If multiple light sensors exist, this will set all of them to min.
-     */
+    // set all light sensors to min
     public void setLightIntensityMin() {
         for (Sensor sensor : sensors) {
             if (sensor instanceof LightIntensitySensor) {
@@ -72,11 +77,7 @@ public class SensorSimulation {
         }
     }
 
-    /**
-     * Convenience method other classes can call at runtime to set the temperature
-     * sensor's value to minimum comfortable level (22°C).
-     * If multiple temperature sensors exist, this will set all of them to 22°C.
-     */
+    // set all temp sensors to min
     public void setTemperatureMin() {
         for (Sensor sensor : sensors) {
             if (sensor instanceof TemperatureSensor) {
@@ -85,11 +86,7 @@ public class SensorSimulation {
         }
     }
 
-    /**
-     * Convenience method other classes can call at runtime to set the temperature
-     * sensor's value to maximum (50°C - extreme heat).
-     * If multiple temperature sensors exist, this will set all of them to 50°C.
-     */
+    // set all temp sensors to max
     public void setTemperatureMax() {
         for (Sensor sensor : sensors) {
             if (sensor instanceof TemperatureSensor) {
@@ -98,11 +95,7 @@ public class SensorSimulation {
         }
     }
 
-    /**
-     * Convenience method other classes can call at runtime to set the humidity
-     * sensor's value to minimum (10%).
-     * If multiple humidity sensors exist, this will set all of them to 10%.
-     */
+    // set all humidity sensors to min
     public void setHumidityMin() {
         for (Sensor sensor : sensors) {
             if (sensor instanceof HumiditySensor) {
@@ -111,6 +104,7 @@ public class SensorSimulation {
         }
     }
     
+    // start the sensor simulation timer
     public void startSimulation() {
         if (isRunning) {
             return;
@@ -138,6 +132,7 @@ public class SensorSimulation {
         }, 0, updateIntervalSeconds * 1000); 
     }
     
+    // poll all sensors and log data
     private void updateAllSensors() {
         SensorData tempReading = null;
         SensorData humidityReading = null;
@@ -187,30 +182,35 @@ public class SensorSimulation {
         if (lightReading != null) checkLightAlert(lightReading);
     }
     
+    // check if temp is too high
     private void checkTemperatureAlert(SensorData reading) {
         if (reading.value > 55) {
             System.out.println("ALERT: High temperature detected!");
         }
     }
     
+    // check if soil is too dry
     private void checkSoilAlert(SensorData reading) {
         if (reading.value < 60) {
             System.out.println("ALERT: Soil moisture very low - Irrigation needed!");
         }
     }
     
+    // check if humidity is too high
     private void checkHumidityAlert(SensorData reading) {
         if (reading.value > 80) {
             System.out.println("ALERT: Very high humidity detected!");
         }
     }
     
+    // check if light is too bright
     private void checkLightAlert(SensorData reading) {
         if (reading.value > 60000) {
             System.out.println("ALERT: High light conditions!");
         }
     }
     
+    // stop the simulation timer
     public void stopSimulation() {
         if (!isRunning) {
             return;
@@ -225,6 +225,7 @@ public class SensorSimulation {
         }
     }
     
+    // main method to run simulation
     public static void main(String[] args) {
         SensorSimulation simulation = new SensorSimulation();
         

@@ -4,57 +4,73 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 public abstract class Sensor implements Monitorable, Controllable{
+    // unique identifier for this sensor
     protected String sensorId;
+    
+    // type of sensor
     protected String sensorType;
+    
+    // measurement unit
     protected String unit;
+    
+    // latest reading value
     protected double currentValue;
+    
+    // random number generator for readings
     protected Random random;
+    
+    // whether sensor is turned on
     protected boolean isActive;
 
-
-public Sensor(String sensorId, String sensorType, String unit){
-    this.sensorId = sensorId;
-    this.sensorType = sensorType;
-    this.unit = unit;
-    this.random = new Random();
-    this.isActive = true;
-    this.currentValue = 0.0;
-    
-}
-
-public abstract double generateReading();
-
-public SensorData  getCurrentReading(){
-    if(isActive){
-        currentValue = generateReading();
-        return new SensorData(sensorType, currentValue, unit, LocalDateTime.now(), sensorId);
-       
+    // create new sensor with id type and unit
+    public Sensor(String sensorId, String sensorType, String unit){
+        this.sensorId = sensorId;
+        this.sensorType = sensorType;
+        this.unit = unit;
+        this.random = new Random();
+        this.isActive = true;
+        this.currentValue = 0.0;
     }
-    return null;
-}
 
-public String getSensorId(){
-    return sensorId;
-}
+    // subclasses must implement reading logic
+    public abstract double generateReading();
 
-public String getUnit(){
-    return unit;
-}
+    // get current reading from sensor
+    public SensorData getCurrentReading(){
+        if(isActive){
+            currentValue = generateReading();
+            return new SensorData(sensorType, currentValue, unit, LocalDateTime.now(), sensorId);
+        }
+        return null;
+    }
 
-public double getCurrentValue(){
-    return currentValue;
-}
+    // get sensor id
+    public String getSensorId(){
+        return sensorId;
+    }
 
-public boolean isActive(){
-    return isActive;
-}
+    // get measurement unit
+    public String getUnit(){
+        return unit;
+    }
 
-public void setActive(boolean active){
-    this.isActive = active;
-}
+    // get last reading value
+    public double getCurrentValue(){
+        return currentValue;
+    }
 
-public String getSensorType(){
-    return sensorType;
-}
+    // check if sensor is on
+    public boolean isActive(){
+        return isActive;
+    }
 
+    // turn sensor on or off
+    public void setActive(boolean active){
+        this.isActive = active;
+    }
+
+    // get sensor type
+    public String getSensorType(){
+        return sensorType;
+    }
 }
