@@ -1,14 +1,17 @@
 package Smart_Agriculture_System.Event_Driven_Automation;
-import Smart_Agriculture_System.Sensor_Simulation.LightIntensitySensor;
-import Smart_Agriculture_System.Sensor_Simulation.TemperatureSensor;
+import Smart_Agriculture_System.Sensor_Simulation.SensorSimulation;
+
 public class ShadeSystem{
     static boolean isShadeOn = false;
-    TemperatureSensor tempSensor = new TemperatureSensor("TemperatureSensor1");
-     LightIntensitySensor lightSensor = new  LightIntensitySensor("LightIntensitySensor1");
+    private SensorSimulation simulation;
+
+      public ShadeSystem(SensorSimulation simulation) {
+        this.simulation = simulation;
+    }
     public void shadeOn() {
         // Code to start shade system
-        tempSensor.setTemperatureMin();
-        lightSensor.setLightIntensityMin();
+        simulation.setTemperatureMin();
+        simulation.setLightIntensityMin();
     }
     public void shadeOff() {
         // Code to stop shade system

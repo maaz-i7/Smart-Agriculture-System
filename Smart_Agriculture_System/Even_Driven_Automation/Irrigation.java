@@ -1,12 +1,20 @@
 package Smart_Agriculture_System.Event_Driven_Automation;
-import Smart_Agriculture_System.Sensor_Simulation.SoilMoistureSensor;
+import Smart_Agriculture_System.Sensor_Simulation.SensorSimulation;
 public class Irrigation {
     static boolean isIrrigationOn = false;
     static int MAX_IRRIGATION_TIME = 4; // import from User
-    SoilMoistureSensor sensor = new SoilMoistureSensor("SoilMoistureSensor1");
+    private SensorSimulation simulation;
+
+
+
+     public Irrigation(SensorSimulation simulation) {
+        this.simulation = simulation;
+    }
+
+
     public void startIrrigation() {
         // Code to start irrigation
-        sensor.setSoilMoistureMax(); // can even setSoilMoisture(10) or something for overloading?
+        simulation.setSoilMoistureMax(); // can even setSoilMoisture(10) or something for overloading?
         isIrrigationOn = true;
     }
     public void startIrrigation(int time)
@@ -17,7 +25,7 @@ public class Irrigation {
         while(time >0)
         {
         time--;
-        sensor.setSoilMoistureMax();
+        simulation.setSoilMoistureMax();
         isIrrigationOn = true;
         }
     }

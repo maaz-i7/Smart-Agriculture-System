@@ -13,7 +13,7 @@ public class Checks {
             writer.write("\nACTION: Irrigation started automatically");
             writer.close();
                }    
-                Irrigation irrigation = new Irrigation();
+                Irrigation irrigation = new Irrigation(Analysis.simulation);
                 irrigation.startIrrigation();
             } 
         }
@@ -30,7 +30,7 @@ public class Checks {
             writer.write("\nACTION: Shade deployed automatically");
             writer.close();
                }    
-                ShadeSystem shade = new ShadeSystem();
+                ShadeSystem shade = new ShadeSystem(Analysis.simulation);
                 shade.shadeOn();
             } 
         }
