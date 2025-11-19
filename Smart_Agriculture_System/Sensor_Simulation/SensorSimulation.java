@@ -97,6 +97,19 @@ public class SensorSimulation {
             }
         }
     }
+
+    /**
+     * Convenience method other classes can call at runtime to set the humidity
+     * sensor's value to minimum (10%).
+     * If multiple humidity sensors exist, this will set all of them to 10%.
+     */
+    public void setHumidityMin() {
+        for (Sensor sensor : sensors) {
+            if (sensor instanceof HumiditySensor) {
+                ((HumiditySensor) sensor).setHumidityMin();
+            }
+        }
+    }
     
     public void startSimulation() {
         if (isRunning) {
