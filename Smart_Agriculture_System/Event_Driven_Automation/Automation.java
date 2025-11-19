@@ -26,12 +26,12 @@ public class Automation {
         int hour = 0;
         
         try (BufferedReader reader = new BufferedReader(new FileReader(
-                "Smart_Agriculture_System\\sensor_data.txt"))) {
+                "sensor_data.txt"))) {
             String line;
             reader.readLine(); // Skip header line
             Thread.sleep(5000); // does line 1 get printed at 0s? if no then need to change value to 15000 to
                                 // ensure 5s offset
-            while (hour < 24) {
+            while (hour < 1000) {
                 while ((line = reader.readLine()) == null) {
                     Thread.sleep(500);
                 } // can we directly do line=reader.readLine() here?
@@ -47,12 +47,12 @@ public class Automation {
 
         int hour = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(
-                "C:\\Users\\maazk\\Downloads\\Smart-Agriculture-System-main\\Smart-Agriculture-System-main\\Smart_Agriculture_System\\sensor_data.txt"))) {
+                "sensor_data.txt"))) {
             String line;
             reader.readLine(); // Skip header line
             Thread.sleep(2000); // does line 1 get printed at 0s? if no then need to change value to 15000 to
                                 // ensure 5s offset
-            while (hour < 24) {
+            while (hour < 1000) {
                 while ((line = reader.readLine()) == null) {
                     Thread.sleep(500);
                 } // can we directly do line=reader.readLine() here?
